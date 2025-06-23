@@ -13,7 +13,7 @@ interface AuthConfig {
 }
 
 interface User {
-	username: string;
+	name: string;
 	id: string;
 	email: string;
 }
@@ -37,6 +37,9 @@ export function setAuthConfig(authConfig: AuthConfig) {
 	if (authConfig.expiresAt) {
 		config.set("expiresAt", authConfig.expiresAt);
 	}
+	if (authConfig.user) {
+		config.set("user", authConfig.user);
+	}
 }
 
 export function clearAuthConfig() {
@@ -46,12 +49,12 @@ export function clearAuthConfig() {
 export async function checkAuth() {
 	const { token, expiresAt } = getAuthConfig();
 
-	if (!token || !expiresAt) {
+	if (!token) {
 		console.error(chalk.red("You are not logged in. Please run 'nimbus login' first."));
 		process.exit(1);
 	}
 
-	if (Date.now() >= expiresAt) {
+	if (expiresAt && Date.now() >= expiresAt) {
 		console.error(chalk.red("Your session has expired. Please run 'nimbus login' again."));
 		process.exit(1);
 	}

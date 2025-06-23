@@ -19,13 +19,14 @@ export async function login() {
 			const refreshToken = url.searchParams.get("refreshToken");
 			const expiresAt = url.searchParams.get("expiresAt");
 			const user = url.searchParams.get("user");
-			if (token && refreshToken && expiresAt) {
-				setAuthConfig({
+			if (token && refreshToken && expiresAt && user) {
+				const authData = {
 					token,
 					refreshToken,
 					expiresAt: parseInt(expiresAt),
-					user: JSON.parse(user!),
-				});
+					user: JSON.parse(user),
+				};
+				setAuthConfig(authData);
 
 				res.writeHead(200, { "Content-Type": "text/html" });
 				res.end(`
@@ -39,7 +40,8 @@ export async function login() {
         `);
 
 				server.close();
-				console.log(chalk.green("Successfully logged in! You can now use the CLI."));
+				console.log(chalk.green("Successfully logged in! Here is the data from the frontend:"));
+				console.log(authData);
 				process.exit(0);
 			} else {
 				throw new Error("Invalid authentication response");

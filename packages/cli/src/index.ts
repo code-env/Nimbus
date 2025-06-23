@@ -58,7 +58,7 @@ program
 	.action(async () => {
 		await checkAuth();
 		const user = getAuthConfig().user;
-		console.log(chalk.green("You are logged in as " + user?.username + " (" + user?.email + ")"));
+		console.log(chalk.green(`\nusername: ${user?.name}\nemail: ${user?.email}`));
 	});
 
 program.parse();
