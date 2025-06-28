@@ -98,3 +98,5 @@ export async function remove(filePath: string) {
 		process.exit(1);
 	}
 }
+
+// the auth is being done with @auth using betterauth and the api's are called in the @server help me fix @cli auth so that when i fetch the files i don't get the error in the @index.ts of user not authenticated.

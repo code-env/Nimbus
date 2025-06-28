@@ -126,6 +126,7 @@
         "open": "^10.1.0",
       },
       "devDependencies": {
+        "@nimbus/db": "workspace:*",
         "@nimbus/tsconfig": "workspace:*",
         "@types/conf": "^3.0.3",
         "@types/inquirer": "^9.0.7",

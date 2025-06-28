@@ -15,6 +15,7 @@ const filesRouter = new Hono();
 // Get all files
 filesRouter.get("/", async (c: Context) => {
 	const user = c.get("user");
+	console.log("user", user);
 	if (!user) {
 		return c.json<FileOperationResponse>({ success: false, message: "User not authenticated" }, 401);
 	}

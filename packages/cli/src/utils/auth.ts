@@ -1,5 +1,8 @@
+import { user } from "@nimbus/db/schema";
 import chalk from "chalk";
 import Conf from "conf";
+
+type User = typeof user.$inferSelect;
 
 const config = new Conf({
 	projectName: "nimbus-cli",
@@ -10,12 +13,6 @@ interface AuthConfig {
 	refreshToken?: string;
 	expiresAt?: number;
 	user?: User;
-}
-
-interface User {
-	name: string;
-	id: string;
-	email: string;
 }
 
 export function getAuthConfig(): AuthConfig {

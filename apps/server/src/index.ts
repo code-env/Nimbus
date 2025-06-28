@@ -1,4 +1,5 @@
 import { auth } from "@nimbus/auth/auth";
+import { logger } from "hono/logger";
 import { env } from "@/config/env";
 import { cors } from "hono/cors";
 import { db } from "@nimbus/db";
@@ -22,8 +23,11 @@ app.use(
 	})
 );
 
+app.use("*", logger());
+
 app.use("*", async (c, next) => {
 	const session = await auth.api.getSession({ headers: c.req.raw.headers });
+	console.log(session);
 
 	// TODO: Add auth middleware and ratelimiting to the drive operations endpoints.
 	if (!session) {
