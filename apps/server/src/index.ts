@@ -26,6 +26,7 @@ app.use(
 app.use("*", logger());
 
 app.use("*", async (c, next) => {
+	console.log("headers", c.req.raw.headers.get("cookie"));
 	const session = await auth.api.getSession({ headers: c.req.raw.headers });
 	console.log(session);
 
